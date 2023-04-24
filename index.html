@@ -1,0 +1,94 @@
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>
+        Music Player
+    </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" />
+</head>
+<body>
+    <!--<img src="bg_1.jpg" />-->
+    <div class="main">
+
+        <div class="music_contain">
+            <h2 id="title">Music</h2>
+            <h3 id="artist">Artist</h3>
+            <div class="img_contain">
+                <img src="music_1.jpg" alt="error" class="anime"/>
+            </div>
+            <audio src="m1.mpeg"></audio>
+            <!--control-->
+            <div class="music_control">
+                <i class="fas fa-backward" id="prev" title="previous"></i>
+                <i class="fas fa-play main_button" id="play" title="play"></i>
+                <i class="fas  fa-forward" id="next" title="next"></i>
+            </div>
+        </div>
+    </div>
+    <script>
+        const music = document.querySelector("audio");
+        const img = document.querySelector("img");
+        const play = document.getElementById("play");
+        const artist = document.querySelector("artist");
+        const title = document.querySelector("title");
+        const prev = document.querySelector("prev");
+        const next = document.querySelector("next");
+
+        const songs = [{
+            name: "m1.mpeg",
+            title: "2",
+            artist: "a"
+        },
+            {
+                name: "m2.mpeg",
+                title: "3",
+                artist: "b"
+            },
+            {
+                name: "m3.mpeg",
+                title: "3",
+                artist: "v"
+            },
+            {
+                name: "m4.mpeg",
+                title: "4",
+                artist: "c"
+            }]
+
+        let isplaying = false;
+
+        const playMusic = () => {
+            isplaying = true;
+            music.play();
+            play.classList.replace("fa-play", "fa-pause");
+            img.classList.add("anime");
+        };
+        //for pause 
+        const pauseMusic = () => {
+            isplaying = false;
+            music.pause();
+            play.classList.replace("fa-pause", "fa-play");
+            img.classList.remove("anime");
+        };
+        play.addEventListener('click', () => {
+           // if (isplaying) {
+             //   pauseMusic();
+           // } else {
+             //   playMusic()
+           // }
+            isplaying ? pauseMusic() : playMusic();
+        });
+        // different pages
+        const loadSong = (song) => {
+            title.textContent = songs.title;
+            artist.textContent = songs.artist;
+            music.src = songs.name + ".mpeg";
+            img.src =  songs.name + ".jpg";
+        };
+        loadSongs(songs);
+
+    </script>
+</body>
+</html>
